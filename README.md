@@ -14,10 +14,19 @@ A small cross-platform desktop application. A wxWidgets main window hosts a nati
 
 ## Prerequisites
 
-Common: CMake >= 3.24, Vulkan SDK >= 1.3.275 (provides headers, `glslc`, validation layer), a C++20 compiler.
+Common: CMake >= 3.24, a C++20 compiler, and Vulkan >= 1.3.275 headers, loader and `glslc` (from the Vulkan SDK on Windows and macOS, from distro packages on Linux).
 
-- **Windows:** Visual Studio 2022 or 2026 with the "Desktop development with C++" workload. Run the commands from PowerShell.
-- **Linux:** GCC or Clang with C++20, `cmake`, `build-essential`, `pkg-config`, Ninja, `libgtk-3-dev`, `libx11-dev`, `libvulkan-dev`, `glslc`, plus the X11 build dependencies of SDL3 (for example `libxext-dev`, `libxcursor-dev`, `libxi-dev`, `libxrandr-dev`, `libxfixes-dev`, `libxss-dev`, `libxkbcommon-dev`; the exact SDL package list is not yet verified). Optional: `vulkan-validationlayers` for Debug validation.
+- **Windows:** Visual Studio 2022 or 2026 with the "Desktop development with C++" workload, and the LunarG Vulkan SDK. Run the commands from PowerShell.
+- **Linux:** GCC or Clang with C++20, CMake, Ninja and pkg-config, plus the GTK 3, X11 and Vulkan development packages. The Vulkan SDK is not needed. On Ubuntu 24.04 / Debian:
+
+  ```sh
+  sudo apt-get install -y build-essential cmake ninja-build pkg-config \
+      libgtk-3-dev libx11-dev libxext-dev libxrandr-dev libxcursor-dev libxi-dev \
+      libxss-dev libxfixes-dev libxtst-dev libxkbcommon-dev \
+      libvulkan-dev glslc
+  ```
+
+  Optional: `vulkan-tools` (`vulkaninfo`, to check the driver) and `vulkan-validationlayers` (validation in Debug builds). This package list has not been verified by a Linux build yet.
 - **macOS:** Xcode command line tools, Ninja, LunarG Vulkan SDK with MoltenVK (not yet supported, see the status table).
 
 ## Build
@@ -76,5 +85,5 @@ Every dependency must be discoverable with `find_package` and built as a static 
 | Platform | Status |
 | --- | --- |
 | Windows 11 + Visual Studio 2022 | Verified (build, unit tests, run, interaction, validation layer clean) |
-| Linux X11 / XWayland | Pending: to be tested under WSL2 |
+| Linux X11 / XWayland | Pending: not yet built or run on Linux |
 | macOS | Not yet supported or verified: a known SDL Cocoa embedding issue (SDL window inside a wxWidgets native view) has still to be addressed |
