@@ -26,7 +26,7 @@ Common: CMake >= 3.24, a C++20 compiler, and Vulkan >= 1.3.275 headers, loader a
       libvulkan-dev glslc
   ```
 
-  Optional: `vulkan-tools` (`vulkaninfo`, to check the driver) and `vulkan-validationlayers` (validation in Debug builds). This package list has not been verified by a Linux build yet.
+  Optional: `vulkan-tools` (`vulkaninfo`, to check the driver) and `vulkan-validationlayers` (validation in Debug builds). This package list was verified by a full build (dependencies, Release and Debug) on Ubuntu 24.04 with GCC 13.
 - **macOS:** Xcode command line tools, Ninja, LunarG Vulkan SDK with MoltenVK (not yet supported, see the status table).
 
 ## Build
@@ -85,5 +85,5 @@ Every dependency must be discoverable with `find_package` and built as a static 
 | Platform | Status |
 | --- | --- |
 | Windows 11 + Visual Studio 2022 | Verified (build, unit tests, run, interaction, validation layer clean) |
-| Linux X11 / XWayland | Pending: not yet built or run on Linux |
+| Linux X11 / XWayland | Verified on Ubuntu 24.04 under WSL2 (WSLg XWayland, Mesa lavapipe CPU Vulkan) with GCC 13: build (Release and Debug), unit tests, run, interaction. Not yet tested on native X11 with a hardware GPU or with the validation layer |
 | macOS | Not yet supported or verified: a known SDL Cocoa embedding issue (SDL window inside a wxWidgets native view) has still to be addressed |
