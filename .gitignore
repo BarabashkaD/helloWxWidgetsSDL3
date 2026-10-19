@@ -1,0 +1,15 @@
+# Build trees
+build/
+build-*/
+out/
+
+# Dependency superbuild output
+deps/build/
+deps/install/
+
+# IDE
+.vs/
+.vscode/
+.idea/
+*.user
+CMakeUserPresets.json
